@@ -1,0 +1,23 @@
+{
+  "name": "angular-pd-account",
+  "version": "0.0.1",
+  "authors": [
+    "Christian Blaschke <mail@platdesign.de>"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "angular",
+    "account"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ]
+}

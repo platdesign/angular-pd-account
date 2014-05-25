@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+
+
+        <script src="vendor/jquery/dist/jquery.js"></script>
+        <script src="vendor/angular/angular.js"></script>
+        <script src="vendor/angular-cookies/angular-cookies.js"></script>
+        <script src="vendor/angular-ui-router/release/angular-ui-router.js"></script>
+
+        <script src="../dist/angular-pd-account.js"></script>
+
+    </head>
+    <body ng-app="app">
+
+    <pd-account-button></pd-account-button>
+
+    <div ng-controller="appCtrl">
+        - <a ui-sref="home">home</a><br>
+        - <a ui-sref="account">Account</a>
+
+        <div ui-view=""></div>
+
+    </div>
+
+
+    </body>
+    <script src="assets/js/app.js"></script>
+</html>
