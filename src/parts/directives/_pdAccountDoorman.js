@@ -27,7 +27,7 @@
 			controller:["$scope", "Account", function($scope, Account){
 				$scope.s = function(val) {
 					$scope.a = val;
-				}
+				};
 			}]
 		};
 	}]);

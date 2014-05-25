@@ -30,7 +30,7 @@
 
 					Account.signIn( $scope.username, $scope.secret )
 					.success(function(){
-						console.log('success')
+						console.log('success');
 					})
 					.error(function(err){
 						$scope.error = err.message;

@@ -1,4 +1,17 @@
-(function(){
+(function (root, factory) {
+
+	var moduleName = 'pdaccount';
+
+	if (typeof define === 'function' && define.amd) {
+		define([moduleName], factory);
+	} else if (typeof exports === 'object') {
+		module.exports = factory();
+	} else {
+		root[moduleName] = factory();
+	}
+
+}(this, function () {
+	
 	'use strict';
 	var module = angular.module('pd.account', ['ngCookies']);
 
@@ -462,7 +475,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 			controller:["$scope", "Account", function($scope, Account){
 				$scope.s = function(val) {
 					$scope.a = val;
-				}
+				};
 			}]
 		};
 	}]);
@@ -499,7 +512,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 
 					Account.signIn( $scope.username, $scope.secret )
 					.success(function(){
-						console.log('success')
+						console.log('success');
 					})
 					.error(function(err){
 						$scope.error = err.message;
@@ -551,4 +564,5 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 
 }());
 	
-}());
+	return module;
+}));
