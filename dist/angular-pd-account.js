@@ -1,13 +1,11 @@
 (function (root, factory) {
 
-	var moduleName = 'pdaccount';
+	var moduleName = 'pd.account';
 
 	if (typeof define === 'function' && define.amd) {
 		define([moduleName], factory);
-	} else if (typeof exports === 'object') {
-		module.exports = factory();
 	} else {
-		root[moduleName] = factory();
+		factory();
 	}
 
 }(this, function () {
@@ -459,11 +457,11 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 			'<div ng-switch on="a">'+
 				'<div ng-switch-default>'+
 					'<pd-account-sign-in-form></pd-account-sign-in-form>'+
-					'Or <span ng-click="s(1)">sign up</span>.'+
+					'No account? <a href="" ng-click="s(1)">Sign up</a>.'+
 				'</div>'+
 				'<div ng-switch-when="1">'+
 					'<pd-account-sign-up-form></pd-account-sign-up-form>'+
-					'Or <span ng-click="s()">sign in</span>.'+
+					'Already an account? <a href="" ng-click="s()">Sign in</a>.'+
 				'</div>'+
 			'</div>',
 
@@ -491,8 +489,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 			template:
 			
 			'<form name="form" ng-submit="process()" class="pd-account-sign-in-form">'+
-				'<h1>SignIn</h1>'+
-				'<input type="text" placeholder="Username" ng-model="username" required/>'+
+				'<input type="email" placeholder="eMail" ng-model="email" required/>'+
 				'<input type="password" placeholder="Password" ng-model="secret" required/>'+
 				'<button type="submit" ng-disabled="form.$invalid">Sign In</button>'+
 				'<div ng-if="error" class="hint-error">{{error}}</div>'+
@@ -510,7 +507,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 				$scope.process = function(){
 					
 
-					Account.signIn( $scope.username, $scope.secret )
+					Account.signIn( $scope.email, $scope.secret )
 					.success(function(){
 						console.log('success');
 					})
@@ -536,13 +533,12 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 			restrict: 'E',
 			template:
 			
-			'<form ng-submit="process()" class="pd-account-sign-up-form">'+
-				'<h1>SignUp</h1>'+
-				'<input type="text" placeholder="Username" ng-model="username" />'+
-				'<input type="text" placeholder="eMail" ng-model="email" />'+
+			'<form name="form" ng-submit="process()" class="pd-account-sign-up-form">'+
+				'<input type="text" placeholder="Username" ng-model="username" required/>'+
+				'<input type="email" placeholder="eMail" ng-model="email" required/>'+
 
-				'<input type="password" placeholder="Password" ng-model="secret" />'+
-				'<button type="submit">Sign Up</button>'+
+				'<input type="password" placeholder="Password" ng-model="secret" required/>'+
+				'<button type="submit" ng-disabled="form.$invalid">Sign Up</button>'+
 			'</form>',
 
 			replace:true,

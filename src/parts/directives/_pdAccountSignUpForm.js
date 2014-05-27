@@ -8,13 +8,12 @@
 			restrict: 'E',
 			template:
 			
-			'<form ng-submit="process()" class="pd-account-sign-up-form">'+
-				'<h1>SignUp</h1>'+
-				'<input type="text" placeholder="Username" ng-model="username" />'+
-				'<input type="text" placeholder="eMail" ng-model="email" />'+
+			'<form name="form" ng-submit="process()" class="pd-account-sign-up-form">'+
+				'<input type="text" placeholder="Username" ng-model="username" required/>'+
+				'<input type="email" placeholder="eMail" ng-model="email" required/>'+
 
-				'<input type="password" placeholder="Password" ng-model="secret" />'+
-				'<button type="submit">Sign Up</button>'+
+				'<input type="password" placeholder="Password" ng-model="secret" required/>'+
+				'<button type="submit" ng-disabled="form.$invalid">Sign Up</button>'+
 			'</form>',
 
 			replace:true,
