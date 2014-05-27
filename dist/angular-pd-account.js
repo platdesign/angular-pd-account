@@ -264,11 +264,28 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @return {void} [description]
 	 */
 	Account.prototype.signOut = Account.prototype.signOut || function(){
-		this._reset();
 		var that = this;
-		$timeout(function(){
+
+		this._signoutRequest(function(){
+			$cookies[ that.config.get('cookiename') ] = false;
+			that._reset();
 			$location.path( that.config.get('afterSignOutRoute') );
+		}, function(){
+			// TODO: ERROR Handling!!!
 		});
+	};
+
+
+
+	/**
+	 * Private method which requests the server to signout an account
+	 * @param  {Object} data username, email, secret
+	 * @param  {callback} success
+	 * @param  {callback} error   
+	 * @return {void}
+	 */
+	Account.prototype._signoutRequest = Account.prototype._signupRequest || function(success, error) {
+		success();
 	};
 
 
@@ -286,7 +303,15 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @return {void}          	 [description]
 	 */
 	Account.prototype.signUp = Account.prototype.signUp || function(username, email, secret) {
-
+		this._signupRequest({
+			username: username,
+			email:email,
+			secret:secret
+		}, function(){
+			// Success
+		}, function(){
+			// Error
+		});
 	};
 
 	/**
@@ -297,7 +322,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @return {void}
 	 */
 	Account.prototype._signupRequest = Account.prototype._signupRequest || function(data, success, error) {
-
+		success();
 	};
 
 
@@ -321,7 +346,11 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @return {void}
 	 */
 	Account.prototype.destroy = Account.prototype.destroy || function(){
-
+		this._destroyRequest({}, function(){
+			//Success
+		}, function(){
+			//Error
+		});
 	};
 
 	/**
@@ -332,7 +361,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @return {void}
 	 */
 	Account.prototype._destroyRequest = Account.prototype._destroyRequest || function(data, success, error) {
-
+		success();
 	};
 
 
@@ -551,7 +580,9 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 			controller:["$scope", "Account", function($scope, Account){
 				
 				$scope.process = function(){
-					Account.signUp( $scope.email, $scope.username, $scope.secret );
+					Account.signUp( $scope.email, $scope.secret, {
+						username: $scope.username
+					});
 				};
 			
 			}]

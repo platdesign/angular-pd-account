@@ -137,7 +137,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @return {void}
 	 */
 	Account.prototype._signoutRequest = Account.prototype._signupRequest || function(success, error) {
-
+		success();
 	};
 
 
@@ -174,7 +174,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @return {void}
 	 */
 	Account.prototype._signupRequest = Account.prototype._signupRequest || function(data, success, error) {
-
+		success();
 	};
 
 
@@ -198,7 +198,11 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @return {void}
 	 */
 	Account.prototype.destroy = Account.prototype.destroy || function(){
-
+		this._destroyRequest({}, function(){
+			//Success
+		}, function(){
+			//Error
+		});
 	};
 
 	/**
@@ -209,7 +213,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @return {void}
 	 */
 	Account.prototype._destroyRequest = Account.prototype._destroyRequest || function(data, success, error) {
-
+		success();
 	};
 
 

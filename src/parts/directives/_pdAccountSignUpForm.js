@@ -26,7 +26,9 @@
 			controller:["$scope", "Account", function($scope, Account){
 				
 				$scope.process = function(){
-					Account.signUp( $scope.email, $scope.username, $scope.secret );
+					Account.signUp( $scope.email, $scope.secret, {
+						username: $scope.username
+					});
 				};
 			
 			}]
