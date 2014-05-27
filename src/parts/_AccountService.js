@@ -116,11 +116,28 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @return {void} [description]
 	 */
 	Account.prototype.signOut = Account.prototype.signOut || function(){
-		this._reset();
 		var that = this;
-		$timeout(function(){
+
+		this._signoutRequest(function(){
+			$cookies[ that.config.get('cookiename') ] = false;
+			that._reset();
 			$location.path( that.config.get('afterSignOutRoute') );
+		}, function(){
+			// TODO: ERROR Handling!!!
 		});
+	};
+
+
+
+	/**
+	 * Private method which requests the server to signout an account
+	 * @param  {Object} data username, email, secret
+	 * @param  {callback} success
+	 * @param  {callback} error   
+	 * @return {void}
+	 */
+	Account.prototype._signoutRequest = Account.prototype._signupRequest || function(success, error) {
+
 	};
 
 
