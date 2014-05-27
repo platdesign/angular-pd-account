@@ -155,7 +155,15 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @return {void}          	 [description]
 	 */
 	Account.prototype.signUp = Account.prototype.signUp || function(username, email, secret) {
-
+		this._signupRequest({
+			username: username,
+			email:email,
+			secret:secret
+		}, function(){
+			// Success
+		}, function(){
+			// Error
+		});
 	};
 
 	/**
