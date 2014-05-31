@@ -152,7 +152,7 @@ var Account = this.Service = function(){
 };
 
 
-var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location", 
+var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 			function($http, $q, $cookies, $timeout, $location) {
 
 
@@ -187,7 +187,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 		return ( $cookies[ this.config.get('cookiename') ] );
 	};
 
-	
+
 
 
 
@@ -219,7 +219,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 					message:'Something went wrong'
 				});
 			});
-			
+
 		} else {
 			deferred.reject({
 				message:'Missing input'
@@ -229,12 +229,12 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 		promise.success(function(data){
 			data = data || {};
 			$cookies[ that.config.get('cookiename') ] = true;
-			
+
 			that.username = data.username;
 			that.email = data.email;
 			$location.path( that.config.get('afterSignInRoute') );
 		});
-		
+
 		return promise;
 	};
 
@@ -242,7 +242,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * Private method which requests the server to signin an account
 	 * @param  {object} data    email, secret
 	 * @param  {callback} success
-	 * @param  {callback} error   
+	 * @param  {callback} error
 	 * @return {void}
 	 */
 	Account.prototype._signinRequest = Account.prototype._signinRequest || function(data, success, error) {
@@ -281,7 +281,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * Private method which requests the server to signout an account
 	 * @param  {Object} data username, email, secret
 	 * @param  {callback} success
-	 * @param  {callback} error   
+	 * @param  {callback} error
 	 * @return {void}
 	 */
 	Account.prototype._signoutRequest = Account.prototype._signupRequest || function(success, error) {
@@ -318,7 +318,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * Private method which requests the server to sinup a new account
 	 * @param  {Object} data username, email, secret
 	 * @param  {callback} success
-	 * @param  {callback} error   
+	 * @param  {callback} error
 	 * @return {void}
 	 */
 	Account.prototype._signupRequest = Account.prototype._signupRequest || function(data, success, error) {
@@ -339,7 +339,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 
 	// Destroy
 	// -------------------------------------------------
-	
+
 
 	/**
 	 * Destroys an account
@@ -357,7 +357,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * Private method to reuqest the server for destroying an account
 	 * @param  {object} data username, email, secret, userid, etc.
 	 * @param  {callback} success
-	 * @param  {callback} error  
+	 * @param  {callback} error
 	 * @return {void}
 	 */
 	Account.prototype._destroyRequest = Account.prototype._destroyRequest || function(data, success, error) {
@@ -407,8 +407,8 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 
 	/**
 	 * Private mehtod to request the server for the account-data by cookie
-	 * @param  {closure} success 
-	 * @param  {closure} error   
+	 * @param  {closure} success
+	 * @param  {closure} error
 	 * @return {void}
 	 */
 	Account.prototype._loadRequest = Account.prototype._loadRequest || function(success, error) {
@@ -423,6 +423,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	service.load();
 	return service;
 }];
+
 		this.$get = AccountService;
 
 	}]);
