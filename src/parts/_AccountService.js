@@ -272,8 +272,9 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	Account.prototype.load = Account.prototype._load || function(){
 		var that = this;
 		if( this.isOnline() ) {
-			this._loadRequest(function(){
-				that.username = 'plati';
+			this._loadRequest(function(data){
+				that.username = data.username;
+				that.email = data.email;
 			}, function(){
 				that._reset();
 				console.error('pdAccount: cant load account data');
