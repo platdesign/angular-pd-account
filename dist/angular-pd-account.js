@@ -20,7 +20,7 @@
 	var module = angular.module('pd.account');
 
 	module.provider('AccountConfig', [function () {
-		
+
 		var service = this;
 
 		var config = {
@@ -33,12 +33,12 @@
 			afterSignUpRoute:	'/',
 			afterDestroyRoute:	'/',
 
-			onlineRequiredOtherwiseRoute: '/',
+			onlineRequiredOtherwiseRoute: '/signin',
 			offlineRequiredOtherwiseRoute: '/',
 
 
-			
-			
+
+
 			backendUrl:			'/account'
 		};
 
@@ -60,6 +60,7 @@
 	}]);
 
 }());
+
 (function(){
 	'use strict';
 
