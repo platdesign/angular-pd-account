@@ -9,7 +9,7 @@
 	}
 
 }(this, function () {
-	
+
 	'use strict';
 	var module = angular.module('pd.account', ['ngCookies']);
 
@@ -303,15 +303,41 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @return {void}          	 [description]
 	 */
 	Account.prototype.signUp = Account.prototype.signUp || function(username, email, secret) {
-		this._signupRequest({
-			username: username,
-			email:email,
-			secret:secret
-		}, function(){
-			// Success
-		}, function(){
-			// Error
+		var that = this;
+
+		var deferred = new AccountDeferred();
+		var promise = deferred.promise;
+
+		if(email && secret) {
+
+			that._signupRequest({
+				email		:	email,
+				secret		:	secret,
+				username	:	username
+			}, function(data){
+				deferred.resolve(data);
+			}, function(){
+				deferred.reject({
+					message:'Something went wrong'
+				});
+			});
+
+		} else {
+			deferred.reject({
+				message:'Missing input'
+			});
+		}
+
+		promise.success(function(data){
+			data = data || {};
+			$cookies[ that.config.get('cookiename') ] = true;
+
+			that.username = data.username;
+			that.email = data.email;
+			$location.path( that.config.get('afterSignUpRoute') );
 		});
+
+		return promise;
 	};
 
 	/**
@@ -322,7 +348,9 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @return {void}
 	 */
 	Account.prototype._signupRequest = Account.prototype._signupRequest || function(data, success, error) {
-		success();
+		$http.post( this.config.get('backendUrl') + '/signup', data )
+		.success(success)
+		.error(error);
 	};
 
 
@@ -591,6 +619,6 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	}]);
 
 }());
-	
+
 	return module;
 }));
