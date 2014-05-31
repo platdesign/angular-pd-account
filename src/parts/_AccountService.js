@@ -163,7 +163,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 		if(email && secret) {
 			obj.email = email;
 			obj.secret = secret;
-
+			console.log(obj)
 			that._signupRequest(obj, function(data){
 				deferred.resolve(data);
 			}, function(){
