@@ -154,19 +154,17 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @param  {String} secret   [description]
 	 * @return {void}          	 [description]
 	 */
-	Account.prototype.signUp = Account.prototype.signUp || function(username, email, secret) {
+	Account.prototype.signUp = Account.prototype.signUp || function(email, secret, obj) {
 		var that = this;
 
 		var deferred = new AccountDeferred();
 		var promise = deferred.promise;
 
 		if(email && secret) {
+			obj.email = email;
+			obj.secret = secret;
 
-			that._signupRequest({
-				email		:	email,
-				secret		:	secret,
-				username	:	username
-			}, function(data){
+			that._signupRequest(obj, function(data){
 				deferred.resolve(data);
 			}, function(){
 				deferred.reject({
