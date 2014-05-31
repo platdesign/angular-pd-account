@@ -80,7 +80,6 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 
 		promise.success(function(data){
 			data = data || {};
-			$cookies[ that.config.get('cookiename') ] = true;
 
 			that.username = data.username;
 			that.email = data.email;
@@ -119,7 +118,6 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 		var that = this;
 
 		this._signoutRequest(function(){
-			$cookies[ that.config.get('cookiename') ] = false;
 			that._reset();
 			$location.path( that.config.get('afterSignOutRoute') );
 		}, function(){
@@ -137,7 +135,9 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @return {void}
 	 */
 	Account.prototype._signoutRequest = Account.prototype._signupRequest || function(success, error) {
-		success();
+		$http.post( this.config.get('backendUrl') + '/signout', data )
+		.success(success)
+		.error(error);
 	};
 
 
@@ -163,7 +163,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 		if(email && secret) {
 			obj.email = email;
 			obj.secret = secret;
-			console.log(obj)
+
 			that._signupRequest(obj, function(data){
 				deferred.resolve(data);
 			}, function(){
@@ -180,8 +180,6 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 
 		promise.success(function(data){
 			data = data || {};
-			$cookies[ that.config.get('cookiename') ] = true;
-
 			that.username = data.username;
 			that.email = data.email;
 			$location.path( that.config.get('afterSignUpRoute') );
