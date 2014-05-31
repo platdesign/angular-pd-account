@@ -135,7 +135,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @return {void}
 	 */
 	Account.prototype._signoutRequest = Account.prototype._signupRequest || function(success, error) {
-		$http.post( this.config.get('backendUrl') + '/signout', data )
+		$http.post( this.config.get('backendUrl') + '/signout' )
 		.success(success)
 		.error(error);
 	};
