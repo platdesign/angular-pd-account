@@ -7,10 +7,11 @@
 		return {
 			restrict: 'E',
 			template:
-			
+
 			'<form name="form" ng-submit="process()" class="pd-account-sign-in-form">'+
 				'<input type="email" placeholder="eMail" ng-model="email" required/>'+
 				'<input type="password" placeholder="Password" ng-model="secret" required/>'+
+				'<input type="checkbox" ng-if="remme" ng-model="rememberme" /> Remember me'+
 				'<button type="submit" ng-disabled="form.$invalid">Sign In</button>'+
 				'<div ng-if="error" class="hint-error">{{error}}</div>'+
 			'</form>',
@@ -20,25 +21,25 @@
 
 			},
 			link: function (scope, iElement, iAttrs) {
-				
+				remme:"=rememberMe"
 			},
 			controller:["$scope", "Account", function($scope, Account){
-				
-				$scope.process = function(){
-					
 
-					Account.signIn( $scope.email, $scope.secret )
+				$scope.process = function(){
+
+
+					Account.signIn( $scope.email, $scope.secret, $scope.rememberme )
 					.success(function(){
 						console.log('success');
 					})
 					.error(function(err){
 						$scope.error = err.message;
 					});
-					
+
 					$scope.secret = undefined;
 
 				};
-			
+
 			}]
 		};
 	}]);

@@ -53,7 +53,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @param  {string} secret   [description]
 	 * @return {void}
 	 */
-	Account.prototype.signIn = Account.prototype.signIn || function(email, secret){
+	Account.prototype.signIn = Account.prototype.signIn || function(email, secret, rememberme){
 		var that = this;
 
 		var deferred = new AccountDeferred();
@@ -63,7 +63,8 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 
 			that._signinRequest({
 				email:email,
-				secret:secret
+				secret:secret,
+				rememberme:rememberme
 			}, function(data){
 				deferred.resolve(data);
 			}, function(){
@@ -258,6 +259,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 */
 	Account.prototype._reset = Account.prototype._reset || function(){
 		this.username = undefined;
+		this.email = undefined;
 		delete $cookies[ this.config.get('cookiename') ];
 	};
 

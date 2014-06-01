@@ -202,7 +202,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 * @param  {string} secret   [description]
 	 * @return {void}
 	 */
-	Account.prototype.signIn = Account.prototype.signIn || function(email, secret){
+	Account.prototype.signIn = Account.prototype.signIn || function(email, secret, rememberme){
 		var that = this;
 
 		var deferred = new AccountDeferred();
@@ -212,7 +212,8 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 
 			that._signinRequest({
 				email:email,
-				secret:secret
+				secret:secret,
+				rememberme:rememberme
 			}, function(data){
 				deferred.resolve(data);
 			}, function(){
@@ -407,6 +408,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 	 */
 	Account.prototype._reset = Account.prototype._reset || function(){
 		this.username = undefined;
+		this.email = undefined;
 		delete $cookies[ this.config.get('cookiename') ];
 	};
 
@@ -543,10 +545,11 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 		return {
 			restrict: 'E',
 			template:
-			
+
 			'<form name="form" ng-submit="process()" class="pd-account-sign-in-form">'+
 				'<input type="email" placeholder="eMail" ng-model="email" required/>'+
 				'<input type="password" placeholder="Password" ng-model="secret" required/>'+
+				'<input type="checkbox" ng-if="remme" ng-model="rememberme" /> Remember me'+
 				'<button type="submit" ng-disabled="form.$invalid">Sign In</button>'+
 				'<div ng-if="error" class="hint-error">{{error}}</div>'+
 			'</form>',
@@ -556,30 +559,31 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 
 			},
 			link: function (scope, iElement, iAttrs) {
-				
+				remme:"=rememberMe"
 			},
 			controller:["$scope", "Account", function($scope, Account){
-				
-				$scope.process = function(){
-					
 
-					Account.signIn( $scope.email, $scope.secret )
+				$scope.process = function(){
+
+
+					Account.signIn( $scope.email, $scope.secret, $scope.rememberme )
 					.success(function(){
 						console.log('success');
 					})
 					.error(function(err){
 						$scope.error = err.message;
 					});
-					
+
 					$scope.secret = undefined;
 
 				};
-			
+
 			}]
 		};
 	}]);
 
-}());(function(){
+}());
+(function(){
 	'use strict';
 
 	var module = angular.module('pd.account');
