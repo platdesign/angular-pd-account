@@ -11,14 +11,14 @@
 			'<form name="form" ng-submit="process()" class="pd-account-sign-in-form">'+
 				'<input type="email" placeholder="eMail" ng-model="email" required/>'+
 				'<input type="password" placeholder="Password" ng-model="secret" required/>'+
-				'<div ng-if="remme"><input type="checkbox" ng-model="rememberme" /> Remember me</div>'+
+				'<div class="remeberme"><input type="checkbox" ng-model="rememberme" id="rememberme" /><label for="rememberme">Remember me</label></div>'+
 				'<button type="submit" ng-disabled="form.$invalid">Sign In</button>'+
 				'<div ng-if="error" class="hint-error">{{error}}</div>'+
 			'</form>',
 
 			replace:true,
 			scope:{
-				remme:"@rememberMe"
+				remme:"=rememberme"
 			},
 			link: function (scope, iElement, iAttrs) {
 

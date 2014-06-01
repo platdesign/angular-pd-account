@@ -4,13 +4,13 @@
 	var module = angular.module('pd.account');
 
 	module.provider('Account', [
-		"$injector", 
-		"AccountConfigProvider", 
+		"$injector",
+		"AccountConfigProvider",
 		function ($injector, AccountConfig) {
-		
+
 		var provider = this;
 
-		
+
 
 
 
@@ -79,11 +79,11 @@
 
 		};
 
-		
 
-		
+
+
 		// ***** SERVICE ******
-		
+
 		//= include _AccountService.js
 		this.$get = AccountService;
 
