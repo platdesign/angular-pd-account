@@ -18,7 +18,7 @@
 
 			replace:true,
 			scope:{
-				remme:"=rememberMe"
+				remme:"@rememberMe"
 			},
 			link: function (scope, iElement, iAttrs) {
 

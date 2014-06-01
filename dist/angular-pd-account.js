@@ -556,7 +556,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 
 			replace:true,
 			scope:{
-				remme:"=rememberMe"
+				remme:"@rememberMe"
 			},
 			link: function (scope, iElement, iAttrs) {
 
