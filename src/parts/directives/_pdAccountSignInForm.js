@@ -12,7 +12,7 @@
 				'<input type="email" placeholder="eMail" ng-model="email" required/>'+
 				'<input type="password" placeholder="Password" ng-model="secret" required/>'+
 				'<div class="remeberme"><input type="checkbox" ng-model="rememberme" id="rememberme" /><label for="rememberme">Remember me</label></div>'+
-				'<button type="submit" ng-disabled="form.$invalid">Sign In</button>'+
+				'<button class="btn pd-account-button btn-submit btn-signin" type="submit" ng-disabled="form.$invalid">Sign In</button>'+
 				'<div ng-if="error" class="hint-error">{{error}}</div>'+
 			'</form>',
 

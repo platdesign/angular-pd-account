@@ -467,7 +467,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 		return {
 			restrict: 'E',
 			template:
-			'<button ng-class="class" ng-click="process()">'+
+			'<button class="btn pd-account-button" ng-class="class" ng-click="process()">'+
 				'{{label()}}'+
 			'</button></div>',
 			replace:true,
@@ -478,12 +478,12 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 
 			},
 			controller:["$scope", "Account", "$location", function($scope, Account, $location){
-				
+
 
 				$scope.class = {
 					'btn-singin':Account.isOnline
 				};
-			
+
 				$scope.label = function() {
 					if( Account.isOnline() ) {
 						return 'Sign out';
@@ -503,7 +503,8 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 		};
 	}]);
 
-}());(function(){
+}());
+(function(){
 	'use strict';
 
 	var module = angular.module('pd.account');
@@ -551,7 +552,7 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 				'<input type="email" placeholder="eMail" ng-model="email" required/>'+
 				'<input type="password" placeholder="Password" ng-model="secret" required/>'+
 				'<div class="remeberme"><input type="checkbox" ng-model="rememberme" id="rememberme" /><label for="rememberme">Remember me</label></div>'+
-				'<button type="submit" ng-disabled="form.$invalid">Sign In</button>'+
+				'<button class="btn pd-account-button btn-submit btn-signin" type="submit" ng-disabled="form.$invalid">Sign In</button>'+
 				'<div ng-if="error" class="hint-error">{{error}}</div>'+
 			'</form>',
 
@@ -593,13 +594,13 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 		return {
 			restrict: 'E',
 			template:
-			
+
 			'<form name="form" ng-submit="process()" class="pd-account-sign-up-form">'+
 				'<input type="text" placeholder="Username" ng-model="username" required/>'+
 				'<input type="email" placeholder="eMail" ng-model="email" required/>'+
 
 				'<input type="password" placeholder="Password" ng-model="secret" required/>'+
-				'<button type="submit" ng-disabled="form.$invalid">Sign Up</button>'+
+				'<button class="btn pd-account-button btn-submit btn-signup" type="submit" ng-disabled="form.$invalid">Sign Up</button>'+
 			'</form>',
 
 			replace:true,
@@ -610,18 +611,19 @@ var AccountService = ["$http", "$q", "$cookies", "$timeout", "$location",
 
 			},
 			controller:["$scope", "Account", function($scope, Account){
-				
+
 				$scope.process = function(){
 					Account.signUp( $scope.email, $scope.secret, {
 						username: $scope.username
 					});
 				};
-			
+
 			}]
 		};
 	}]);
 
 }());
+
 
 	return module;
 }));

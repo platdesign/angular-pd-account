@@ -7,7 +7,7 @@
 		return {
 			restrict: 'E',
 			template:
-			'<button ng-class="class" ng-click="process()">'+
+			'<button class="btn pd-account-button" ng-class="class" ng-click="process()">'+
 				'{{label()}}'+
 			'</button></div>',
 			replace:true,
@@ -18,12 +18,12 @@
 
 			},
 			controller:["$scope", "Account", "$location", function($scope, Account, $location){
-				
+
 
 				$scope.class = {
 					'btn-singin':Account.isOnline
 				};
-			
+
 				$scope.label = function() {
 					if( Account.isOnline() ) {
 						return 'Sign out';
